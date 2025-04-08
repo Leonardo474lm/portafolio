@@ -1,23 +1,30 @@
 import CircularProgress from "@mui/joy/CircularProgress";
 import Grid from "@mui/joy/Grid";
-import Image from "next/image";
 import Avatar from "@mui/joy/Avatar";
+import { Box, Card, Typography } from "@mui/joy";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <Grid container spacing={2} sx={{ flexGrow: 2 }}>
-        <Grid xs={12}>
-          <Avatar />
+    <Box
+      sx={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: 2 }}
+    >
+      <Box sx={{ gridColumn: "span 12" }}>
+        <div className="flex w-full flex-row items-center justify-center border-2  p-2 h-full">
           <h1>Leonardo Piero LLiuya Manrique</h1>
-        </Grid>
-        <Grid xs={4}>
-          <h1>nadvar</h1>
-        </Grid>
-        <Grid xs={8}>
-          <CircularProgress />
-        </Grid>
-      </Grid>
-    </div>
+        </div>
+      </Box>
+      <Box sx={{ gridColumn: "span 12" }}>
+        <div className="flex w-full flex-row items-center justify-center border-2  p-2 h-dvw-full">
+          <Card sx={{ width: 320 }}>
+            <div>
+              <Typography level="title-lg">
+                App para registro de mensajes!
+              </Typography>
+              <Typography level="body-sm">Last version:07-042025</Typography>
+            </div>
+          </Card>
+        </div>
+      </Box>
+    </Box>
   );
 }
