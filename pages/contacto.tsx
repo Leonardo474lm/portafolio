@@ -13,6 +13,11 @@ import {
   SnackbarOrigin,
   Typography,
 } from "@mui/joy";
+
+interface registro {
+  email: string;
+  mensaje: string;
+}
 import React from "react";
 interface State extends SnackbarOrigin {
   open: boolean;
@@ -24,15 +29,12 @@ export default function Contacto() {
     horizontal: "center",
   });
   const { vertical, horizontal, open } = state;
-
   const handleClick = (newState: SnackbarOrigin) => () => {
     setState({ ...newState, open: true });
   };
-
   const handleClose = () => {
     setState({ ...state, open: false });
   };
- 
   return (
     <Card variant="outlined">
       <Typography level="h2" className="text-center">
@@ -63,7 +65,7 @@ export default function Contacto() {
           onClose={handleClose}
           key={vertical + horizontal}
         >
-            Successfull: Enviado Correctamente!
+          Successfull: Enviado Correctamente!
         </Snackbar>
       </Box>
     </Card>

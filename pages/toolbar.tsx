@@ -6,7 +6,7 @@ import linkedingLogo from "@/public/linkeding.png";
 export default function ToolbarComponent() {
   return (
     <>
-      <div className="flex w-full flex-row bg-[#000000]">
+      <div className="flex w-full flex-row bg-[#181346]">
         <div
           className="p-4"
           onClick={() => {

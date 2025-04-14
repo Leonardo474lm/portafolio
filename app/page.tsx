@@ -1,31 +1,57 @@
 "use client";
 import ToolbarComponent from "@/pages/toolbar";
-import { AspectRatio, Box, Button, Card, Divider, Skeleton, Typography } from "@mui/joy";
+import { animate, Target, utils, waapi, engine } from "animejs";
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Card,
+  Divider,
+  Link,
+  Skeleton,
+  Typography,
+} from "@mui/joy";
+
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import imagentexto from "@/public/textoimagentransparente.png";
 import imagenfondo from "@/public/imagenfondo.png";
+import imagenPerfil from "@/public/perfil.jpeg";
 import SkeletonComponent from "./component/skeleton";
-import { Podkova } from "next/font/google";
-import { POST } from "./api/send/route";
 import Contacto from "@/pages/contacto";
+
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [toolbarHeight, setToolbarHeight] = useState(0);
+
+  animate("span", {
+    // Property keyframes
+    y: [
+      { to: "-2.75rem", ease: "outExpo", duration: 600 },
+      { to: 0, ease: "outBounce", duration: 800, delay: 100 },
+    ],
+    // Property specific parameters
+    rotate: {
+      from: "-1turn",
+      delay: 0,
+    },
+    delay: (_, i) => i * 50, // Function based value
+    ease: "inOutCirc",
+    loopDelay: 1000,
+    loop: true,
+  });
   useEffect(() => {
     if (toolbarRef.current) {
       const resizeObserver = new ResizeObserver(([entry]) => {
         setToolbarHeight(entry.contentRect.height);
       });
-
       resizeObserver.observe(toolbarRef.current);
-
-      // Limpieza
       return () => resizeObserver.disconnect();
     }
   }, []);
-
+  engine.defaults.playbackEase = "inOut";
   const handleSendEmail = async () => {
     setLoading(true);
     setSuccess(false);
@@ -55,80 +81,116 @@ export default function Home() {
 
   return (
     <div className="bg-[#000000] ">
-      <div ref={toolbarRef}>
+      <header ref={toolbarRef}>
         <ToolbarComponent />
-      </div>
-      <section
-        className="flex h-screen flex-col items-center justify-center bg-cyan-950"
-        style={{
-          height: `calc(100vh - ${toolbarHeight}px)`,
-          backgroundImage: `url(${imagenfondo.src})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <Card variant="soft" color="primary" className="w-96 p-4">
-          <Typography level="h1">Hola, Soy Leonardo</Typography>
-          <Typography level="body-sm">
-            Soy un desarrollador web y este es mi portafolio personal para ver
-            mi avance.
-          </Typography>
-        </Card>
-      </section>
-
-      <section className="flex flex-col sm:flex-row items-center justify-center bg-[#ffffff] h-screen p-4">
-        {/* Imagen Card */}
-        <div className="w-full sm:w-1/2 p-4">
-          <Card variant="outlined" className="w-full p-4">
-            <AspectRatio ratio="1" sx={{ width: "100%", height: "auto" }}>
-              <img
-                src={imagentexto.src}
-                loading="lazy"
-                alt="Rastreo de Mensajes"
-                className="object-cover"
+      </header>
+      <main className="container py-10 align-center flex-col">
+        <section className="py-20 md:py-28 flex flex-col md:flex-row items-center gap-8  m-5">
+          <div className="flex-1 space-y-4">
+            <h1 className=" flex text-4xl md:text-6xl font-bold tracking-tight">
+              Hi, I'm
+              <h1 className="flex">
+                <span>&nbsp;</span>
+                <span>L</span>
+                <span>E</span>
+                <span>O</span>
+                <span>N</span>
+                <span>A</span>
+                <span>R</span>
+                <span>D</span>
+                <span>O</span>
+              </h1>
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground">
+              Fullstack Developer
+            </p>
+            <p className="text-muted-foreground max-w-md"></p>
+            <div className="flex gap-4 pt-4 ">
+              <Button>View Projects</Button>
+              <Button variant="outlined">Download CV</Button>
+            </div>
+            <div className="flex gap-4 pt-4 bg">
+              <Link
+                href="https://github.com/Leonardo474lm"
+                target="_blank"
+                rel="noopener noreferrer"
+                bgcolor={"white"}
+              >
+                <Button variant="plain" size="md" className="bg-amber-200">
+                  <span className="sr-only">GitHub</span>
+                </Button>
+              </Link>
+              <Link
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                bgcolor={"white"}
+              >
+                <Button variant="plain" size="md">
+                  <span className="sr-only">LinkedIn</span>
+                </Button>
+              </Link>
+              <Link href="" bgcolor={"white"}>
+                <Button variant="plain" size="md">
+                  <span className="sr-only">Email</span>
+                </Button>
+              </Link>
+            </div>
+          </div>
+          <div className="flex-1 flex justify-center md:justify-end">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
+              <Image
+                src={imagenfondo.src}
+                alt="Project Image"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-t-lg"
               />
-            </AspectRatio>
-          </Card>
-        </div>
+            </div>
+          </div>
+        </section>
 
-        {/* Texto Card */}
-        <div className="w-full sm:w-1/2 p-4">
-          <Card
-            variant="outlined"
-            color="primary"
-            className="h-full flex flex-col justify-center"
-          >
-            <Typography level="h2" className="text-center">
-              Rastreo de Mensajes
-            </Typography>
-            <Typography level="h4" className="text-center">
-              (version: 1.0.2)
-            </Typography>
+        <section id="projects" className="py-16 scroll-mt-20 m-5">
+          <div className="space-y-4 mb-8">
+            <h2 className="text-3xl font-bold tracking-tight">My Projects</h2>
+            <div className="w-20 h-1 bg-primary"></div>
+          </div>
 
-            <Typography level="body-sm" className="mt-4 text-center">
-              Esta es una aplicación móvil que permite rastrear mensajes de
-              WhatsApp desde un archivo Excel.
-            </Typography>
-            <Button
-              onClick={() => {
-                handleSendEmail();
-              }}
-            >
-              Descargar Apk{" "}
-            </Button>
-          </Card>
-        </div>
-      </section>
-      <section className="flex flex-col sm:flex-row items-center justify-center bg-[#2e2899] h-screen p-4">
-        <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-4">
-          <SkeletonComponent />
-        </div>
-        <Divider orientation="vertical" />
-        <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-4">
-          <Contacto></Contacto>
-        </div>
-      </section>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="overflow-hidden">
+              <div className="relative h-48">
+                <Image
+                  src={imagenfondo.src}
+                  alt="Project Image"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t-lg"
+                />
+              </div>
 
+              <div className="p-4">
+                <Typography level="h4" className="font-bold">
+                  Aplicacion de Registro de mensajes de Whatsapp.
+                </Typography>
+                <Typography level="body-sm">
+                  Esta es una aplicación móvil que permite rastrear mensajes de
+                  WhatsApp desde un archivo Excel.
+                </Typography>
+                <Typography level="body-xs">(version: 1.0.2)</Typography>
+                <Button
+                  className=""
+                  variant="solid"
+                  onClick={() => {
+                    handleSendEmail();
+                  }}
+                >
+                  Descargar Apk{" "}
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </section>
+      </main>
       <footer className="flex items-center justify-center border-t p-2">
         <Typography level="body-sm" className="text-center">
           © 2025 Leonardo. Todos los derechos reservados.
