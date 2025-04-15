@@ -19,29 +19,60 @@ import imagenfondo from "@/public/imagenfondo.png";
 import imagenPerfil from "@/public/perfil.jpeg";
 import SkeletonComponent from "./component/skeleton";
 import Contacto from "@/pages/contacto";
+import { Console } from "console";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [toolbarHeight, setToolbarHeight] = useState(0);
+  const squareRefs = useRef<HTMLDivElement[]>([]);
+  const [validateonClick, setvalidateonClick] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const spans = document.querySelectorAll("span");
+      animate(spans, {
+        y: [
+          { to: "-2.75rem", ease: "outExpo", duration: 600 },
+          { to: 0, ease: "outBounce", duration: 800, delay: 100 },
+        ],
+        rotate: {
+          from: "-1turn",
+          delay: 0,
+        },
+        delay: (_, i) => i * 50,
+        ease: "inOutCirc",
+        loopDelay: 1000,
+        loop: true,
+      });
 
-  animate("span", {
-    // Property keyframes
-    y: [
-      { to: "-2.75rem", ease: "outExpo", duration: 600 },
-      { to: 0, ease: "outBounce", duration: 800, delay: 100 },
-    ],
-    // Property specific parameters
-    rotate: {
-      from: "-1turn",
-      delay: 0,
-    },
-    delay: (_, i) => i * 50, // Function based value
-    ease: "inOutCirc",
-    loopDelay: 1000,
-    loop: true,
-  });
+      if (squareRefs.current.length > 0) {
+        animate(squareRefs.current, {
+          /* ... */
+        });
+      }
+    }
+  }, []);
+  function handleonMouseEnter() {
+    setvalidateonClick(!validateonClick);
+  }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const square = document.querySelectorAll(".square");
+      animate(square, {
+        x: (target, index, length) =>
+          parseFloat(target.dataset.value || "0") * (length - index),
+        y: (_: unknown, i: number) => 50 + -50 * i,
+        scale: (_: unknown, i: number, l: number) => (l - i) * 0.75,
+        rotate: () => utils.random(-360, 360),
+        borderRadius: () => `+=${utils.random(0, 8)}`,
+        duration: () => utils.random(1200, 1800),
+        delay: () => utils.random(0, 400),
+        ease: "outElastic(1, .5)",
+      });
+    }
+  }, [validateonClick]);
+
   useEffect(() => {
     if (toolbarRef.current) {
       const resizeObserver = new ResizeObserver(([entry]) => {
@@ -51,7 +82,7 @@ export default function Home() {
       return () => resizeObserver.disconnect();
     }
   }, []);
-  engine.defaults.playbackEase = "inOut";
+
   const handleSendEmail = async () => {
     setLoading(true);
     setSuccess(false);
@@ -78,7 +109,7 @@ export default function Home() {
       setLoading(false);
     }
   };
-
+ 
   return (
     <div className="bg-[#000000] ">
       <header ref={toolbarRef}>
@@ -142,7 +173,7 @@ export default function Home() {
               <Image
                 src={imagenfondo.src}
                 alt="Project Image"
-                layout="fill"
+                fill
                 objectFit="cover"
                 className="rounded-t-lg"
               />
@@ -157,7 +188,27 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
+            <div className="medium row ">
+              <div className="square" data-x="170">
+                imagen1
+              </div>
+            </div>
+            <div className="medium row ">
+              <div className="square" data-x="80">
+                imagen2
+              </div>
+            </div>
+            <div className="medium row ">
+              <div className="square" data-x="270">
+                imagen3
+              </div>
+            </div>
+            <Card
+              className="overflow-hidden"
+              onMouseEnter={() => {
+                handleonMouseEnter();
+              }}
+            >
               <div className="relative h-48">
                 <Image
                   src={imagenfondo.src}
@@ -176,12 +227,13 @@ export default function Home() {
                   Esta es una aplicación móvil que permite rastrear mensajes de
                   WhatsApp desde un archivo Excel.
                 </Typography>
-                <Typography level="body-xs">(version: 1.0.2)</Typography>
+                <h5>(version: 1.0.2)</h5>
                 <Button
                   className=""
                   variant="solid"
                   onClick={() => {
-                    handleSendEmail();
+                    console.log("Descargar APK");
+                    //handleSendEmail();
                   }}
                 >
                   Descargar Apk{" "}
