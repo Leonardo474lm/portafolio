@@ -1,0 +1,5 @@
+services:
+  portafolio:
+    image: portafolio
+    ports:
+      - "8080:80"
