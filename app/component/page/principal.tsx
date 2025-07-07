@@ -42,11 +42,11 @@ export default function PrincipalPage() {
       //h-[calc(100vh-4rem)]
   return (
     <div className=" flex flex-col md:flex-row items-center w-full h-screen overflow-auto p-4  bg-gradient-to-b from-[#102158] to-[#000000]">
-      <div className="flex-1 max-h-max justify-items-center  pt-15 pl-4 pr-4 ">
-        <h1 className=" flex text-4xl md:text-6xl font-bold tracking-tight notranslate z-10">
+      <div className="flex-1 max-h-max justify-items-center  pt-30 pl-4 pr-4 ">
+        <h1 className=" flex text-4xl md:text-6xl font-bold tracking-tight notranslate z-10 text-[#ff3c00]">
        Hi, I'm
        
-          <div className="flex">
+          <div className="flex text-[#ffffff]">
             <span>&nbsp;</span>
             <span className="spant notranslate">L</span>
             <span className="spant notranslate">E</span>
