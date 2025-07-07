@@ -1,7 +1,7 @@
 "use client";
 import { Button, Link } from "@mui/joy";
 import Image from "next/image";
-import imagenfondo from "@/public/logoLeo.png";
+import imagenfondo from "@/public/logoLeonardo.png";
 import { useEffect, useRef, useState } from "react";
 import { animate } from "animejs";
 
@@ -39,12 +39,13 @@ export default function PrincipalPage() {
         animate("#css-selector-id", { rotate: "1turn" });
         animate(".row:nth-child(3) .square", { scale: [1, 0.5, 1] });
       }, [handleCard]);
-      
+      //h-[calc(100vh-4rem)]
   return (
-    <div className="py-20 md:py-28 flex flex-col md:flex-row items-center w-full gap-8  h-screen ">
-      <div className="flex-1 space-y-4align-middle justify-items-center">
-        <h1 className=" flex text-4xl md:text-6xl font-bold tracking-tight notranslate">
-          Hi, I'm
+    <div className=" flex flex-col md:flex-row items-center w-full h-screen overflow-auto p-4  bg-gradient-to-b from-[#102158] to-[#000000]">
+      <div className="flex-1 max-h-max justify-items-center  pt-15 pl-4 pr-4 ">
+        <h1 className=" flex text-4xl md:text-6xl font-bold tracking-tight notranslate z-10">
+       Hi, I'm
+       
           <div className="flex">
             <span>&nbsp;</span>
             <span className="spant notranslate">L</span>
@@ -83,8 +84,8 @@ export default function PrincipalPage() {
           </Link>
         </div>
       </div>
-      <div className="flex-1 flex justify-center md:justify-center ">
-        <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20 mr-6">
+      <div className="flex-1 flex justify-center items-center  ">
+        <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
           <Image
             src={imagenfondo.src}
             alt="Project Image"

@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/joy";
 
+
 interface registro {
   email: string;
   mensaje: string;

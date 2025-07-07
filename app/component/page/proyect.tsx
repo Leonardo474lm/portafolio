@@ -1,15 +1,14 @@
-import CardTemplate from "./card-template";
-import imagenfondo from "@/public/imagenfondo.png";
-import imagenproyectowsp from "@/public/textoimagen.png";
+import CardTemplate from "../card-template";
+import nexttosoon from "@/public/nexttosoon.jpg";
+import imagenproyectowsp from "@/public/Gemini_Generated_Image_wserzvwserzvwser2.png";
 export default function ProyectoTemplate() {
   return (
-    <div id="projects" className="py-16 scroll-mt-20 bg-white w-full">
-      <div className="space-y-4 mb-8">
-        <h2 className="text-3xl font-bold tracking-tight">My Projects</h2>
-        <div className="w-20 h-1 bg-primary"></div>
+    <div id="projects" className="p-8 scroll-mt-20 bg-black w-full">
+      <div className="space-y-4">
+        <h2 className="text-3xl font-bold tracking-tight text-[#102158] justify-center items-center text-center sm:text-left">My Projects</h2>
       </div>
 
-      <div className="grid md:grid-rows-2 md:grid-cols-3 gap-4">
+      <div className="grid md:grid-rows-2 md:grid-cols-3 gap-4  my-8">
         <CardTemplate
           version="(version: 1.0.2)"
           imagen={imagenproyectowsp}
@@ -21,25 +20,25 @@ export default function ProyectoTemplate() {
         />
         <CardTemplate
           version="(version: 1.0.0)"
-          imagen={imagenfondo}
-          info="This is a sample project description."
+          imagen={nexttosoon}
+          info="Descripcion . . ."
+          title="Aplicacion de Registro de PAGOS de Yape y Plin y depositos bancarios"
+          reverseAnimation="reverseAnimationFunction"
+          handleClick={() => console.log("Card clicked")}
+        />
+        <CardTemplate
+          imagen={nexttosoon}
+          version="(version: 1.0.0)"
+         info="Descripcion . . ."
           title="Sample Project"
           reverseAnimation="reverseAnimationFunction"
           handleClick={() => console.log("Card clicked")}
         />
         <CardTemplate
-          imagen={imagenfondo}
+          imagen={nexttosoon}
           version="(version: 1.0.0)"
-          info="This is a sample project description."
-          title="Sample Project"
-          reverseAnimation="reverseAnimationFunction"
-          handleClick={() => console.log("Card clicked")}
-        />
-        <CardTemplate
-          imagen={imagenfondo}
-          version="(version: 1.0.0)"
-          info="This is a sample project description."
-          title="Sample Project"
+       info="Descripcion . . ."
+           title="Sample Project"
           reverseAnimation="reverseAnimationFunction"
           handleClick={() => console.log("Card clicked")}
         />

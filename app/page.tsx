@@ -1,23 +1,11 @@
 "use client";
 import ToolbarComponent from "@/app/component/toolbar";
-import { animate, Target, utils, waapi, engine, stagger } from "animejs";
 import {
-  AspectRatio,
-  Box,
-  Button,
-  Card,
-  Divider,
-  Link,
-  Skeleton,
   Typography,
 } from "@mui/joy";
-
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import imagenfondo from "@/public/imagenfondo.png";
-import CardTemplate from "./component/card-template";
-import PrincipalPage from "./component/principal";
-import ProyectoTemplate from "./component/proyect";
+import PrincipalPage from "./component/page/principal";
+import ProyectoTemplate from "./component/page/proyect";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -50,11 +38,11 @@ export default function Home() {
     }
   };
   return (
-    <div className="bg-[#000000] w-full ">
-      <header ref={toolbarRef}>
+    <div className=" ">
+      <header  className="fixed top-0 left-0 w-full z-50 bg-white shadow" ref={toolbarRef}>
         <ToolbarComponent />
       </header>
-      <main className=" py-10 align-center flex-col w-full">
+      <main className="align-center flex-col w-full">
         <PrincipalPage />
         <ProyectoTemplate />
       </main>

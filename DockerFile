@@ -1,0 +1,14 @@
+FROM node:22 AS builder
+#direcotorio para guardar etodo el codigo
+WORKDIR /app
+
+#se cipoa en el directorio
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD npm run dev

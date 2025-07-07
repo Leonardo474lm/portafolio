@@ -24,7 +24,7 @@ export default function CardTemplate({
   return (
     <>
       <Card
-        className="overflow-hidden transition-all duration-300"
+        className="overflow-hidden h-full transition-all duration-300  bg-gradient-to-t from-[#0b163b] to-[#000000]"
         onMouseLeave={() => {
           reverseAnimation;
         }}
@@ -41,17 +41,17 @@ export default function CardTemplate({
             className="rounded-t-lg"
           />
         </div>
-        <div className="p-4">
-          <Typography level="h4" className="font-bold">
+        <div className="p-4 flex flex-col justify-between h-full" >
+          <h2 className="text-1xl font-bold text-gray-300 ">
             {title}
-          </Typography>
-          <Typography level="body-sm">{info}</Typography>
-          <h5 className="flex justify-end">{version}</h5>
-          <div className="items-center justify-center flex ">
+          </h2>
+          <h4 className="text-sm text-gray-500">{info}</h4>
+          
+          <div className="flex h-28 justify-center items-end ">
+            <div className="">
             <Button
-              className=" "
-              color="neutral"
-              variant="solid"
+              className=""
+              variant="outlined"
               onClick={() => {
 
                 console.log("Descargar APK");
@@ -59,7 +59,9 @@ export default function CardTemplate({
             >
               Solicitar Apk{" "}
             </Button>
+            </div>
           </div>
+          <h5 className="flex justify-end text-gray-800">{version}</h5>
         </div>
       </Card>
     </>
